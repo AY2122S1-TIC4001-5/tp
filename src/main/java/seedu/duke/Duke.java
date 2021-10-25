@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     /**
@@ -28,6 +29,9 @@ public class Duke {
             FlightList flightList = new FlightList();
             String userInput;
             boolean online = true;
+            Storage storage = new Storage(flightList);
+            storage.readFile();
+            //System.out.println(path.getParent());               // <-- Parent directory
 
             while (online) {
                 Scanner scan = new Scanner(System.in);
@@ -40,6 +44,7 @@ public class Duke {
                     break;
                 case "add":
                     flightList.addFlight(userInput);
+                    storage.saveToDB(userInput);
                     System.out.println("Your flight has been added.\n" + "You have " + flightList.getSize()
                                 + " flights in your record");
                     break;
