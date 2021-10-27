@@ -55,7 +55,7 @@ public class Storage {
     public static void deleteFromDB(String message) throws IOException {
         FileWriter fileWriter = new FileWriter("FlightDB.txt", true);
         BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
-        PrintWriter printWriter = new PrintWriter(new FileWriter(fileWriter));
+        PrintWriter printWriter = new PrintWriter(fileWriter);
         StringBuffer inputBuffer = new StringBuffer();
         String line = "";
         String number = message.substring(7).trim();
