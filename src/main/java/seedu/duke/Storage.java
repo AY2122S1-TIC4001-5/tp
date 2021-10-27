@@ -17,7 +17,7 @@ public class Storage {
     private File file;
 
     public static FlightList flightList;
-    public Storage (FlightList flightList) {
+    public Storage(FlightList flightList) {
         this.flightList = flightList;
     }
 
@@ -53,16 +53,14 @@ public class Storage {
      * deleted flight details from flightDB file.
      */
     public static void deleteFromDB(String message) throws IOException {
-        FileWriter fileWriter = new FileWriter("FlightDB.txt", true);
         BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
-        PrintWriter printWriter = new PrintWriter(fileWriter);
         StringBuffer inputBuffer = new StringBuffer();
         String line = "";
         String number = message.substring(7).trim();
         int index = Integer.parseInt(number);
-        for ( int i = 0; i < flightList.getSize(); i++ ) {
+        for (int i = 0; i < flightList.getSize(); i++) {
             line = fileRead.readLine();
-            if ( i != index ) {
+            if (i != index) {
                 // keep all other task other than deleted task
                 inputBuffer.append(line);
                 inputBuffer.append('\n');
@@ -70,9 +68,7 @@ public class Storage {
         }
         FileOutputStream fileOut = new FileOutputStream("FlightDB.txt");
         fileOut.write(inputBuffer.toString().getBytes());
-        fileWriter.close();
         fileRead.close();
-        printWriter.close();
         fileOut.close();
     }
 }
