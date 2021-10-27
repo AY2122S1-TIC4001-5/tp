@@ -56,6 +56,7 @@ public class Duke {
                     break;
                 case "delete":
                     flightList.deleteFlight(userInput);
+                    storage.deleteFromDB(userInput);
                     System.out.println("Your flight has been deleted.\n" + "You have " + flightList.getSize()
                                 + " flights in your record");
                     break;

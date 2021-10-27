@@ -9,21 +9,22 @@ import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.io.FileOutputStream;
 
 public class Storage {
     private static String file_path;
     private BufferedReader fileRead;
     private File file;
 
-    public FlightList flightList;
+    public static FlightList flightList;
     public Storage(FlightList flightList){
         this.flightList = flightList;
     }
 
     /**
-     * Read all flight details from DB file and store them to fightList
-     */
-    public void readFile() throws FileNotFoundException, IOException{
+    * Read all flight details from DB file and store them to fightList
+    */
+    public void readFile() throws FileNotFoundException, IOException {
         BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
         String line = fileRead.readLine();
         while(line != null){
@@ -38,15 +39,38 @@ public class Storage {
     }
 
     /**
-     * Save fight details into flightDB file
-     */
-     public static void saveToDB(String flightData) throws IOException {
-         FileWriter fileWriter = new FileWriter("FlightDB.txt", true);
-         PrintWriter printWriter = new PrintWriter(fileWriter);
-         printWriter.println(flightData);
-         fileWriter.close();
-         printWriter.close();
+    * Save fight details into flightDB file
+    */
+    public static void saveToDB(String flightData) throws IOException {
+        FileWriter fileWriter = new FileWriter("FlightDB.txt", true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.println(flightData);
+        fileWriter.close();
+        printWriter.close();
+    }
 
-     }
-
+    /**
+    * deleted flight details from flightDB file
+    */
+    public static void deleteFromDB(String message) throws IOException {
+        BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
+        PrintWriter printWriter = new PrintWriter(new FileWriter("FlightDB.txt", true));
+        StringBuffer inputBuffer = new StringBuffer();
+        String line = "";
+        String number = message.substring(7).trim();
+        int index = Integer.parseInt(number);
+        for(int i = 0; i < flightList.getSize(); i++ ){
+            line = fileRead.readLine();
+            if(i != index){
+                // keep all other task other than deleted task
+                inputBuffer.append(line);
+                inputBuffer.append('\n');
+            }
+        }
+        FileOutputStream fileOut = new FileOutputStream("FlightDB.txt");
+        fileOut.write(inputBuffer.toString().getBytes());
+        fileRead.close();
+        printWriter.close();
+        fileOut.close();
+    }
 }
