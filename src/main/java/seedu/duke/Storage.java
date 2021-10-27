@@ -15,8 +15,8 @@ public class Storage {
     private static String file_path;
     private BufferedReader fileRead;
     private File file;
-
     public static FlightList flightList;
+
     public Storage(FlightList flightList) {
         this.flightList = flightList;
     }
