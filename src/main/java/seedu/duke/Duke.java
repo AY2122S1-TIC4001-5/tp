@@ -31,7 +31,6 @@ public class Duke {
             boolean online = true;
             Storage storage = new Storage(flightList);
             storage.readFile();
-            //System.out.println(path.getParent());               // <-- Parent directory
 
             while (online) {
                 Scanner scan = new Scanner(System.in);
