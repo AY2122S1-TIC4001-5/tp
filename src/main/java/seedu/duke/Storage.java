@@ -21,9 +21,7 @@ public class Storage {
      * Read all flight details from DB file and store them to fightList.
      */
     public void readFile() throws FileNotFoundException, IOException {
-        FileReader fileReader = new FileReader("FlightDB.txt");
-        //BufferedReader fileRead = new BufferedReader(fileReader);
-        /*
+        BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
         String line = fileRead.readLine();
         while (line != null) {
             //String[] splitLine = line.split(" \\| ");
@@ -34,7 +32,7 @@ public class Storage {
         System.out.println("You have " + flightList.getSize()
                                         + " flights in your record");
         fileRead.close();
-        */
+
     }
 
     /**
