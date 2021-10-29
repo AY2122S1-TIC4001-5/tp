@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -12,9 +11,6 @@ import java.text.ParseException;
 import java.io.FileOutputStream;
 
 public class Storage {
-    private static String file_path;
-    private BufferedReader fileRead;
-    private File file;
     public static FlightList flightList;
 
     public Storage(FlightList flightList) {
@@ -25,7 +21,9 @@ public class Storage {
      * Read all flight details from DB file and store them to fightList.
      */
     public void readFile() throws FileNotFoundException, IOException {
-        BufferedReader fileRead = new BufferedReader(new FileReader("FlightDB.txt"));
+        FileReader fileReader = new FileReader("FlightDB.txt");
+        //BufferedReader fileRead = new BufferedReader(fileReader);
+        /*
         String line = fileRead.readLine();
         while (line != null) {
             //String[] splitLine = line.split(" \\| ");
@@ -36,6 +34,7 @@ public class Storage {
         System.out.println("You have " + flightList.getSize()
                                         + " flights in your record");
         fileRead.close();
+        */
     }
 
     /**
